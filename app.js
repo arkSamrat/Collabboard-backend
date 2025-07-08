@@ -23,8 +23,7 @@ const port = 3000
 const server=http.createServer(app);
 
 
-const allowedOrigins = [
-  'http://localhost:5173',                      
+const allowedOrigins = [                      
   'https://collabboard-frontend-lr6i.vercel.app'
 ];
 
@@ -63,8 +62,8 @@ app.post('/login',async (req,res)=>
                  let token = jwt.sign({email},process.env.JWT_SECRET);
                  res.cookie('token', token, {
                      httpOnly: true,
-                     secure: process.env.NODE_ENV === 'production', 
-                        sameSite: 'lax'
+                     secure: true, 
+                        sameSite: 'none'
                     });
 
                 return res.json({message:'User Found',success:true});
@@ -101,8 +100,8 @@ try
     let token = jwt.sign({email},process.env.JWT_SECRET);
     res.cookie('token', token, {
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production', 
-  sameSite: 'lax'
+  secure: true, 
+  sameSite: 'none'
     });
 
 
